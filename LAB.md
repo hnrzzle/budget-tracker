@@ -21,7 +21,7 @@ In this app a category should contain at least the following properties:
 
 This reducer should support the following interactions 
 
-* `CATEGORY_LOAD`
+* `CATEGORIES_LOAD`
 * `CATEGORY_ADD`
 * `CATEGORY_REMOVE`
 * STRETCH: `CATEGORIES_UPDATE`
