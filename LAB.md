@@ -68,6 +68,3 @@ The App component should set up the Provider for the redux store and the Router.
 ####  Documentation  
 Write a description of the project in your README.md
 
-
-####  Devsign Notes
-See our [classwork repo](https://github.com/acl-devsign-winter-2018/classwork/tree/master/frontend/week02_state-redux/class02_devsign-notes)
