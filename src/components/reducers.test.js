@@ -15,6 +15,8 @@ function categories(state = [], { type, payload }) {
       return [...state, payload];
     case CATEGORY_UPDATE:
       return state.map(category => category.id === payload.id ? payload : category);
+    case CATEGORY_REMOVE:
+      return state.filter(category => category !== payload);
     default:
       return state;
   }
@@ -31,6 +33,13 @@ const food = {
   timestamp: new Date(),
   name: 'food',
   budget: 100
+};
+
+const fun = {
+  id: shortid.generate(),
+  timestamp: new Date(),
+  name: 'fun',
+  budget: 20
 };
 
 
@@ -55,4 +64,9 @@ it('updates a category', () => {
     }
   );
   expect(state).toEqual([{ id: 1, timestamp: '2018-06-07', name: 'entertainment', budget: 200 }]);
+});
+
+it('removes a category', () => {
+  const state = categories([food, fun], { type: CATEGORY_REMOVE, payload: fun });
+  expect(state).toEqual([food]);
 });
