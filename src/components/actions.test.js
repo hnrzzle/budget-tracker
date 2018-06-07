@@ -8,8 +8,13 @@ import { loadCategories, addCategory, updateCategory, removeCategory } from './a
 
 import shortid from 'shortid';
 
+it('creates a load action', () => {
+  const { type, payload } = loadCategories();
+  expect(type).toBe(CATEGORIES_LOAD);
+  expect(payload.length).toBe(3);
+});
 
-it('creates an add action', () => {
+it('create an add action', () => {
   const category = { name: 'fun', budget: 20 };
 
   const { type, payload } = addCategory(category);
@@ -21,3 +26,21 @@ it('creates an add action', () => {
   expect(timestamp).toBeTruthy();
 });
 
+it('create an update action', () => {
+  const fun = { name: 'fun', budget: 20 };
+  const action = updateCategory(fun);
+  expect(action).toEqual({
+    type: CATEGORY_UPDATE,
+    payload: fun
+  });
+});
+
+it('create a remove action', () => {
+  const fun = { name: 'fun', budget: 20 };
+
+  const action = removeCategory(fun);
+  expect(action).toEqual({
+    type: CATEGORY_REMOVE,
+    payload: fun
+  });
+});
