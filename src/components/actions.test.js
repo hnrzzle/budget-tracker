@@ -1,12 +1,9 @@
 import {
-  categories,
   CATEGORIES_LOAD,
   CATEGORY_ADD,
   CATEGORY_UPDATE,
   CATEGORY_REMOVE } from './reducers';
 import { loadCategories, addCategory, updateCategory, removeCategory } from './actions';
-
-import shortid from 'shortid';
 
 it('creates a load action', () => {
   const { type, payload } = loadCategories();

@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <main>
         <h1>Budget Tracker</h1>
-
+        <Categories/>
       </main>
     );
   }

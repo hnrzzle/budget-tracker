@@ -6,6 +6,8 @@ import App from './components/app/App';
 import store from './store';
 
 ReactDOM.render(
-  <App/>,
+  <Provider store={store}>
+    <App/>
+  </Provider>,
   document.getElementById('root')
 );
