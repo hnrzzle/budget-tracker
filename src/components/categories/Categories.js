@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Category from './Category';
+import CategoryForm from './CategoryForm';
 import { loadCategories, addCategory, removeCategory } from '../actions';
 
 class Categories extends Component {
@@ -24,6 +25,7 @@ class Categories extends Component {
     return (
       <div>
         <h2>Categories</h2>
+        <CategoryForm onComplete={addCategory} label="add"/>
       </div>
     );
   }
