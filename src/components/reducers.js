@@ -4,7 +4,6 @@ export const CATEGORY_UPDATE = 'CATEGORY_UPDATE';
 export const CATEGORY_REMOVE = 'CATEGORY_REMOVE';
 
 
-
 export function categories(state = [], { type, payload }) {
   switch (type) {
     case CATEGORIES_LOAD:
@@ -15,6 +14,16 @@ export function categories(state = [], { type, payload }) {
       return state.map(category => category.id === payload.id ? payload : category);
     case CATEGORY_REMOVE:
       return state.filter(category => category !== payload);
+    default:
+      return state;
+  }
+}
+
+export function expenses(state = {}, { type, payload }) {
+  switch (type) {
+
+
+  
     default:
       return state;
   }
