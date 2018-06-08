@@ -26,6 +26,13 @@ class Categories extends Component {
       <div>
         <h2>Categories</h2>
         <CategoryForm onComplete={addCategory} label="add"/>
+        <ul>
+          {categories.map(category => <Category 
+            key={category.name} 
+            onRemove={removeCategory} 
+            category={category}
+          />)}
+        </ul>
       </div>
     );
   }

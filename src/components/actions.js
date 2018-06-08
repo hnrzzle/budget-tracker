@@ -6,15 +6,15 @@ import {
 
 import shortid from 'shortid';
 
-const categoriesData = [
-  { name: 'fun', budget: 20 },
-  { name: 'food', budget: 50 },
-  { name: 'entertainment', budget: 40 }
+const categoriesData = () => [
+  addCategory({ name: 'Fun', budget: 20 }).payload,
+  addCategory({ name: 'Food', budget: 50 }).payload,
+  addCategory({ name: 'Entertainment', budget: 40 }).payload
 ];
 
 export const loadCategories = () => ({
   type: CATEGORIES_LOAD,
-  payload: categoriesData
+  payload: categoriesData()
 });
 
 export const addCategory = category => {
