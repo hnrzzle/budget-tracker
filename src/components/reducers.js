@@ -3,6 +3,8 @@ export const CATEGORY_ADD = 'CATEGORY_ADD';
 export const CATEGORY_UPDATE = 'CATEGORY_UPDATE';
 export const CATEGORY_REMOVE = 'CATEGORY_REMOVE';
 
+export const EXPENSE_CREATE = 'EXPENSE_CREATE';
+
 
 export function categories(state = [], { type, payload }) {
   switch (type) {
@@ -19,10 +21,18 @@ export function categories(state = [], { type, payload }) {
   }
 }
 
-export function expenses(state = {}, { type, payload }) {
+export function expensesByCategory(state = {}, { type, payload }) {
   switch (type) {
-
-
+    case CATEGORIES_LOAD:
+      return payload.reduce((map, category) => {
+        map[category.id] = category.expenses;
+        return map;
+      }, {});
+    case CATEGORY_ADD:
+      return {
+        ...state,
+        [payload.id]: []
+      };
   
     default:
       return state;

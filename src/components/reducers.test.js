@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import {
   categories,
-  expenses,
+  expensesByCategory,
   CATEGORIES_LOAD,
   CATEGORY_ADD,
   CATEGORY_UPDATE,
@@ -59,9 +59,46 @@ describe('categories reducer', () => {
 });
 
 describe('expenses reducer', () => {
+
+  const lunch = {
+    id: 1,
+    categoryId: 3,
+    timestamp: new Date(),
+    name: 'Lunch',
+    price: 8
+  };
+
+  const car = {
+    id: 2,
+    categoryId: 4,
+    timestamp: new Date(),
+    name: 'Ford',
+    price: 10000
+  };
+
   it('has a default value of empty object', () => {
-    const state = expenses(undefined, {});
+    const state = expensesByCategory(undefined, {});
     expect(state).toEqual({});
+  });
+
+  it('adds an entry on category add', () => {
+    const state = expensesByCategory({}, { type: CATEGORY_ADD, payload: { id: 3 } });
+    expect(state).toEqual({ 3: [] });
+  });
+
+  it('loads expenses', () => {
+    const state = expensesByCategory({}, {
+      type: CATEGORIES_LOAD,
+      payload: [{
+        id: 123,
+        expenses: [lunch]
+      },
+      {
+        id: 456,
+        expenses: [car]
+      }]
+    });
+    expect(state).toEqual({ 123: [lunch], 456: [car] });
   });
 
 
