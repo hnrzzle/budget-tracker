@@ -1,8 +1,8 @@
 import {
-  CATEGORIES_LOAD,
-  CATEGORY_ADD,
-  CATEGORY_UPDATE,
-  CATEGORY_REMOVE } from './reducers';
+  CATEGORIES_LOAD, CATEGORY_ADD, CATEGORY_UPDATE, CATEGORY_REMOVE } from './reducers';
+import { EXPENSE_CREATE, EXPENSE_UPDATE, EXPENSE_DELETE } from './reducers';
+
+import { postCategory, getCategories, deleteCategory, putCategory, postExpense } from '../services/api';
 
 import shortid from 'shortid';
 
