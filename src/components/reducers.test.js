@@ -5,7 +5,10 @@ import {
   CATEGORIES_LOAD,
   CATEGORY_ADD,
   CATEGORY_UPDATE,
-  CATEGORY_REMOVE } from './reducers';
+  CATEGORY_REMOVE,
+  EXPENSE_CREATE,
+  EXPENSE_UPDATE,
+  EXPENSE_DELETE } from './reducers';
 
 describe('categories reducer', () => {
 
@@ -99,6 +102,37 @@ describe('expenses reducer', () => {
       }]
     });
     expect(state).toEqual({ 123: [lunch], 456: [car] });
+  });
+
+  it('removes an entry on category remove', () => {
+    const state = expensesByCategory({ 123: [], 456: [] }, { type: CATEGORY_REMOVE, payload: { id: 123 } });
+    expect(state).toEqual({ 456: [] });
+  });
+
+  it('adds an expense to an category', () => {
+    const state = expensesByCategory({ 123: [lunch] }, {
+      type: EXPENSE_CREATE,
+      payload: {
+        categoryId: 123,
+        expense: car
+      }
+    });
+    expect(state).toEqual({ 123: [lunch, car] });
+  });
+
+  it('Updates an Expense', () => {
+    const state = expensesByCategory(
+      { 123: [{ id: 456, name: 'bike', price: 400 }] },
+      { type: EXPENSE_UPDATE, payload: { 
+        categoryId: 123, expense: { id: 456, name: 'bike', price: 1000 } } });
+    expect(state).toEqual({ 123: [{ id: 456, name: 'bike', price: 1000 }] });
+  });
+
+  it('deletes an expense', () => {
+    const state = expensesByCategory(
+      { 123: [lunch, car] },
+      { type: EXPENSE_DELETE, payload: { categoryId: 123, expense: car } });
+    expect(state).toEqual({ 123: [lunch] });
   });
 
 
