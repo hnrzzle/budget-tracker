@@ -65,16 +65,15 @@ describe('expenses reducer', () => {
 
   const lunch = {
     id: 1,
-    categoryId: 3,
+    categoryId: 123,
     timestamp: new Date(),
     name: 'Lunch',
     price: 8
   };
 
   const car = {
-    id: 2,
-    categoryId: 4,
-    timestamp: new Date(),
+    id: 123,
+    categoryId: 123,
     name: 'Ford',
     price: 10000
   };
@@ -109,15 +108,16 @@ describe('expenses reducer', () => {
     expect(state).toEqual({ 456: [] });
   });
 
-  it('adds an expense to an category', () => {
+  it('adds an expense to a category', () => {
     const state = expensesByCategory({ 123: [lunch] }, {
       type: EXPENSE_CREATE,
       payload: {
         categoryId: 123,
-        expense: car
+        ...car
       }
     });
-    expect(state).toEqual({ 123: [lunch, car] });
+    const expected = { 123: [lunch, car] };
+    expect(state).toEqual(expected);
   });
 
   it('Updates an Expense', () => {
@@ -131,10 +131,7 @@ describe('expenses reducer', () => {
   it('deletes an expense', () => {
     const state = expensesByCategory(
       { 123: [lunch, car] },
-      { type: EXPENSE_DELETE, payload: { categoryId: 123, expense: car } });
+      { type: EXPENSE_DELETE, payload: car });
     expect(state).toEqual({ 123: [lunch] });
   });
-
-
-
 });
