@@ -3,22 +3,24 @@ import PropTypes from 'prop-types';
 
 const defaultState = {
   name: '',
-  budget: ''
+  price: ''
 };
 
-export default class CategoryForm extends Component {
+export default class ExpenseForm extends Component {
 
   static propTypes = {
-    category: PropTypes.object,
+    expense: PropTypes.object,
+    categoryId: PropTypes.string.isRequired,
     onComplete: PropTypes.func.isRequired,
     onCancel: PropTypes.func,
+    label: PropTypes.string.isRequired
   };
 
-  static getDerivedStateFromProps({ category }, { edit }) {
+  static getDerivedStateFromProps({ expense }, { edit }) {
     if(edit) return null;
 
     return {
-      edit: category ? { ...category } : { ...defaultState }
+      edit: expense ? { ...expense } : { ...defaultState }
     };
   }
 
@@ -31,7 +33,8 @@ export default class CategoryForm extends Component {
       return {
         edit: {
           ...edit,
-          [target.name]: target.value
+          [target.name]: target.value,
+          categoryId: this.props.categoryId
         }
       };
     });
@@ -46,8 +49,8 @@ export default class CategoryForm extends Component {
   };
 
   render() {
-    const { name, budget } = this.state.edit;
-    const { onCancel } = this.props;
+    const { name, price } = this.state.edit;
+    const { label, onCancel } = this.props;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -57,10 +60,10 @@ export default class CategoryForm extends Component {
         </label>
 
         <label>
-          Budget:
-          <input name="budget" value={budget} onChange={this.handleChange}/>
+          Price:
+          <input name="price" value={price} onChange={this.handleChange}/>
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">{label}</button>
         {onCancel && <button type="reset" onClick={onCancel}>Cancel</button>}
       </form>
     );
