@@ -1,5 +1,5 @@
 const request = require('superagent');
-const BASE_URL = 'https://open-budget-server.herokuapp.com/api/hnrzzle/categories';
+const BASE_URL = 'https://budget-tracker-server.herokuapp.com/api/hnrzzle-test/categories';
 
 export const postCategory = category => {
   return request
@@ -26,5 +26,17 @@ export const putCategory = category => {
 export const postExpense = expense => {
   return request
     .post(`${BASE_URL}/${expense.categoryId}/expenses`)
+    .send(expense);
+};
+
+export const putExpense = expense => {
+  return request
+    .put(`${BASE_URL}/${expense.categoryId}/expenses/${expense.id}`)
+    .send(expense);
+};
+
+export const deleteExpense = expense => {
+  return request
+    .del(`${BASE_URL}/${expense.categoryId}/expenses/${expense.id}`)
     .send(expense);
 };
