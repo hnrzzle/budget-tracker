@@ -1,5 +1,5 @@
 const request = require('superagent');
-const BASE_URL = 'https://budget-tracker-server.herokuapp.com/api/hnrzzle-test/categories';
+const BASE_URL = 'https://budget-tracker-server.herokuapp.com/api/hnrzzle/categories';
 
 export const postCategory = category => {
   return request
