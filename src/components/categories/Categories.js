@@ -1,48 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Category from './Category';
-import CategoryForm from './CategoryForm';
-import { loadCategories, addCategory, removeCategory } from '../actions';
 
-class Categories extends Component {
+export default class Categories extends Component {
 
   static propTypes = {
-    categories: PropTypes.array,
-    loadCategories: PropTypes.func.isRequired,
-    addCategory: PropTypes.func.isRequired,
-    removeCategory: PropTypes.func.isRequired
+    category: PropTypes.object,
+    onRemove: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired
   };
 
-  componentDidMount() {
-    this.props.loadCategories();
-  }
+  state = {
+    viewing: false
+  };
+
+  handleView = () => {
+    const { viewing } = this.state;
+    this.setState({ viewing: !viewing });
+  };
 
   render() {
-    const { categories, addCategory, removeCategory } = this.props;
-    if(!categories) return null;
+    const { category, onRemove, onUpdate } = this.props;
+    const { viewing } = this.state;
+    const { name, id } = category;
 
     return (
       <div>
-        <h2>Categories</h2>
-        <CategoryForm onComplete={addCategory} label="add"/>
-        <ul>
-          {categories.map(category => <Category 
-            key={category.name} 
-            onRemove={removeCategory} 
-            category={category}
-          />)}
-        </ul>
+        <li key={id}>
+          <h3>{name}</h3>
+          {!viewing && <button onClick={this.handleView}>Expand</button>}
+          {viewing && <button onClick={this.handleView}>Hide</button>} 
+        </li>
+        {viewing && <Category
+          category={category}
+          onRemove={onRemove}
+          onUpdate={onUpdate}
+        />}
       </div>
     );
   }
-
-
 }
-
-export default connect(
-
-  state => ({ categories: state.categories }),
-
-  { loadCategories, addCategory, removeCategory }
-)(Categories);
