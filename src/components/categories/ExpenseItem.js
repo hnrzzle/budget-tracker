@@ -42,13 +42,13 @@ export default class ExpenseItem extends Component {
       <div>
         <li key={id}>
           <strong>{name}</strong>
-          <button onClick={this.handleView}>VIEW</button>
+          <button onClick={this.handleView}>Show</button>
         </li>
         {this.state.viewing &&
         <li key={`detail${id}`}>
           <p>Price: ${price} <br/> Added: {timestamp.toLocaleString().substring(0, 10)}</p>
           {editing || <button onClick={this.handleEdit}>Edit</button>}
-          <button onClick={() => onRemove(expense)}>REMOVE</button>
+          <button onClick={() => onRemove(expense)}>Hide</button>
           {editing &&
           <div>
             <ExpenseForm
